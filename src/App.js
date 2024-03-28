@@ -1,75 +1,60 @@
 import "./App.scss";
-import HomeIcon from '@mui/icons-material/Home';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
+// import { useState } from "react";
+import Header from "./components/Header";
+import CarouselSlider from "./components/CarouselSlider";
 
-import { useState } from "react";
 
-import Logo from './assets/images/icona-cibando.png';
+// import { Label } from "@mui/icons-material";
 
 function App() {
-  const [pippo, setPippo] = useState('ciao');
-  const [interruttore, setInterruttore] = useState(false);
+  // const [pippo, setPippo] = useState('ciao');
+  // const [interruttore, setInterruttore] = useState(false);
 
-  function cambiaValore() {
-    if(pippo === 'ciao') {
-      setPippo('buongiorno');
-    } else {
-      setPippo('ciao');
-    }
+  // function cambiaValore() {
+  //   if(pippo === 'ciao') {
+  //     setPippo('buongiorno');
+  //   } else {
+  //     setPippo('ciao');
+  //   }
+  //   // pippo === 'ciao' ? setPippo('buongiorno') : setPippo('ciao')
+  //   // setPippo(pippo === 'ciao' ? 'buongiorno' : 'ciao');
+  // }
 
-    // pippo === 'ciao' ? setPippo('buongiorno') : setPippo('ciao')
-
-    // setPippo(pippo === 'ciao' ? 'buongiorno' : 'ciao');
-
-  }
-
+  // const allievi = [
+  //   {
+  //     nome: 'Danilo',
+  //     cognome: 'De Filio',
+  //     eta: 49
+  //   },
+  //   {
+  //     nome: 'Paolo',
+  //     cognome: 'Rossi',
+  //     eta: 30
+  //   },
+  //   {
+  //     nome: 'Marco',
+  //     cognome: 'Bianchi',
+  //     eta: 35
+  //   },
+  //   {
+  //     nome: 'Simone',
+  //     cognome: 'Verdi',
+  //     eta: 25
+  //   },
+  //   {
+  //     nome: 'David',
+  //     cognome: 'Gialli',
+  //     eta: 20
+  //   }
+  // ]
   return (
     <>
-      <header>
-        <nav className="navbar navbar-expand-lg bg-red navbar-dark">
-          <div className="container-fluid">
-            <img src={Logo} className="icona-cibando" />
-            <a className="navbar-brand" href="#">
-              Cibando
-            </a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">
-                   <HomeIcon>Filled</HomeIcon> Home
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    <MenuBookIcon>Filled</MenuBookIcon> Ricette
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                   <MarkAsUnreadIcon>Filled</MarkAsUnreadIcon> Contatti
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </header>
+      <Header />
+      <CarouselSlider />
       <div className="container-titolo">
         <h2>App di esempio</h2>
         <p className="paragrafo">Ecco il testo iniziale</p>
-        <h3>{pippo}</h3>
+        {/* <h3>{pippo}</h3>
         <button className="btn btn-primary" onClick={cambiaValore}>Cambia</button>
         <div>
           {interruttore ? (
@@ -87,6 +72,22 @@ function App() {
         </div>
         
       </div>
+      { allievi.length > 0  && (
+        <div>
+          Attualmente ci sono {allievi.length} allievi
+          { allievi.map((allievo, i) => (
+              <ul key={i}>
+                <li>Nome: {allievo.nome}</li>
+                <li>Cognome: {allievo.cognome}</li>
+                <li>Età: {allievo.eta}</li>
+              </ul>
+          ))}
+        </div>
+      )}
+      { allievi.length === 0 && (
+        <div> non ci sono allievi</div>
+      )} */}
+     </div>
     </>
   );
 }
