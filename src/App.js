@@ -54,7 +54,7 @@ function App() {
       <div className="container-titolo">
         <h2>App di esempio</h2>
         <p className="paragrafo">Ecco il testo iniziale</p>
-        {/* <h3>{pippo}</h3>
+        {/* 
         <button className="btn btn-primary" onClick={cambiaValore}>Cambia</button>
         <div>
           {interruttore ? (
