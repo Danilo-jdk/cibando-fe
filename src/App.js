@@ -52,7 +52,7 @@ function App() {
       <Header />
       <CarouselSlider />
       <div className="container-titolo">
-        <h2>App di esempio</h2>
+        <h2>App di esempio</h2> 
         <p className="paragrafo">Ecco il testo iniziale</p>
         {/* 
         <button className="btn btn-primary" onClick={cambiaValore}>Cambia</button>
