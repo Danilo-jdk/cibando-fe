@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import RecipeApi from "../api/recipeApi";
 
+import RecipeCard from "../components/RecipeCard";
+
 const Recipes = () => {
     const [ ricette, setRicette ] = useState([]);
+
 
     async function prendiRicette() {
         try {
@@ -36,7 +39,10 @@ useEffect(() => {
 
 
     return (
-        <div>Ricette</div>
+        <>
+            <h2 style={{marginLeft: '20px'}}>Le nostre Ricette</h2>
+            <RecipeCard ricette={ricette} nome='dan' frase='ciao'/>
+        </>
     )
 }
 
