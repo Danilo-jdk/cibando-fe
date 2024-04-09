@@ -9,9 +9,19 @@ async function getRecipes() {
     }
 }
 
+const getRecipe = async (id) => {
+    try {
+        const response = await RECIPES.find(ricetta => ricetta._id ===  id);
+        return response;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 const RecipeApi = {
     getRecipes: getRecipes,
+    getRecipe: getRecipe
 }
 
 export default RecipeApi;

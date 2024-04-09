@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const RecipeCard = (props) => {
 
@@ -7,8 +8,8 @@ const RecipeCard = (props) => {
 
   return (
     <Contenitore>
-        { ricette.map((ricetta) => (
-            <div className="container-card">
+        { ricette.map((ricetta, index) => (
+            <div className="container-card" key={index}>
                 <div className="card">
                     <div className="card-image" style={{backgroundImage:`url(${ricetta.image})` }} ></div>
 
@@ -17,7 +18,9 @@ const RecipeCard = (props) => {
                         <p className="card-text">
                             {ricetta.description}
                         </p>
-                        <button className="btn btn-primary">Visualizza</button>
+                        <Link to={`/dettaglio/${ricetta.title}/${ricetta._id}`}>
+                            <button className="btn btn-primary">Visualizza</button> 
+                        </Link>
                     </div>
                 </div>
             </div>
