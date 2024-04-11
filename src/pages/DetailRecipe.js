@@ -6,20 +6,38 @@ import RecipeApi from "../api/recipeApi";
 const DetailRecipe =  () => {
     const { id } = useParams();
     const [ ricetta, setRicetta ] = useState();
+    const [ loading, setLoading ] = useState(false);
+    const percorsoDifficolta = "/assets/images/difficolta-";
 
     async function onGetRecipe(){
         try {
+            setLoading(true);
             const idNumber = Number(id);
             const recipe = await RecipeApi.getRecipe(idNumber);
-            setRicetta(recipe);
+            if (recipe) {
+                setRicetta(recipe);
+                setLoading(false);
+            } else {
+                setLoading(false)
+            }
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            setLoading(false);
         }
     }
 
     useEffect(() => {
         onGetRecipe();
     }, [])
+
+    function etichetta(difficolta){
+        let stringa;
+        if(difficolta < 3){ stringa = 'facile'}
+        else if(difficolta === 3 ){ stringa = 'medio'}
+        else  { stringa = 'difficile'}
+        return stringa;
+    }
+
 
     return(
         <Contenitore>
@@ -35,7 +53,10 @@ const DetailRecipe =  () => {
                   </div>
                   <div className="row">
                       <div className="col">
-                          Difficoltà {ricetta.difficulty}
+                          Difficoltà {etichetta(ricetta.difficulty)}
+                          <div className="row">
+                            <img src={percorsoDifficolta+ricetta.difficulty+'.png'} alt={ricetta.title} className="difficolta"/>
+                          </div>
                       </div>
                       <div className="col data">
                           Data {ricetta.date}
@@ -44,8 +65,15 @@ const DetailRecipe =  () => {
               </div>
            </>
           )}
-          { !ricetta && (
-            <div>caricamento in corso</div>
+          { !ricetta && !loading && (
+            <div>Spiacente la ricetta cercata non è più disponibile</div>
+          )}
+          { loading && (
+            <div className="container-spinner">
+                <div className="spinner-border text-danger" role='status'>
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
           )}
         </Contenitore>
     )
@@ -70,6 +98,16 @@ const Contenitore = styled.div `
     display: flex;
     justify-content: flex-end;
  }
+
+ .difficolta {
+    width: 150px;
+ }
+ .container-spinner {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
 `
 
 export default DetailRecipe;

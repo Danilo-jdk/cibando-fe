@@ -6,17 +6,35 @@ const RecipeCard = (props) => {
 
     const ricette = props.ricette;
 
+    const accorciaDescrizione = (descrizione) => {
+        const lunghezzaMassima = 170;
+
+        if (descrizione.length <= lunghezzaMassima){
+            return lunghezzaMassima
+        } else {
+            const posizioneUltimoSpazio = descrizione.indexOf(' ', lunghezzaMassima);
+            return posizioneUltimoSpazio;
+        }
+    }
+
+    function inviaTitolo(titolo){
+        console.log('titolo da inviare ' + titolo)
+        if (props.pag === 'ricette') {
+            props.onTitoloRicevuto(titolo); // richiamando la funzione di callback nel comp padre
+        }
+    }
+
   return (
     <Contenitore>
         { ricette.map((ricetta, index) => (
             <div className="container-card" key={index}>
                 <div className="card">
-                    <div className="card-image" style={{backgroundImage:`url(${ricetta.image})` }} ></div>
+                    <div className="card-image" style={{backgroundImage:`url(${ricetta.image})` }} onClick={() => inviaTitolo(ricetta.title)}></div>
 
                     <div className="card-body">
                         <h5 className="card-title">{ricetta.title}</h5>
                         <p className="card-text">
-                            {ricetta.description}
+                            {ricetta.description.slice(0, accorciaDescrizione(ricetta.description))} ...
                         </p>
                         <Link to={`/dettaglio/${ricetta.title}/${ricetta._id}`}>
                             <button className="btn btn-primary">Visualizza</button> 

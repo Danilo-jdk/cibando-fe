@@ -1,20 +1,29 @@
 import { useState, useEffect } from "react";
 import RecipeApi from "../api/recipeApi";
+import styled from "styled-components";
 
 import RecipeCard from "../components/RecipeCard";
 
 const Recipes = () => {
     const [ ricette, setRicette ] = useState([]);
-
+    const [ titolo, setTitolo ] = useState('');
 
     async function prendiRicette() {
         try {
             const response = await RecipeApi.getRecipes();
             if(response){
-               setRicette(response);
+               setRicette(response.sort((a,b) => b._id - a._id));
             }
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    function titoloDalFiglio(data) {
+        if(data !== titolo){
+            setTitolo(data)
+        } else {
+            setTitolo('');
         }
     }
 
@@ -39,11 +48,28 @@ useEffect(() => {
 
 
     return (
-        <>
+        <Contenitore>
             <h2 style={{marginLeft: '20px'}}>Le nostre Ricette</h2>
-            <RecipeCard ricette={ricette} nome='dan' frase='ciao'/>
-        </>
+            <div className="contenitore-titolo">
+                { titolo && (
+                    <h3 className="titolo">{titolo}</h3>
+                )}
+            </div>
+            
+            <RecipeCard ricette={ricette} nome='dan' frase='ciao' onTitoloRicevuto={titoloDalFiglio} pag='ricette'/>
+        </Contenitore>
     )
 }
 
+const Contenitore = styled.div `
+    .contenitore-titolo {
+        height: 50px;
+    }
+    h3 {
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+        
+    }
+`
 export default Recipes;
