@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Recipes from "./pages/Recipes";
 import DetailRecipe from "./pages/DetailRecipe";
+import RegistrationUser from "./pages/RegistrationUser";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
               <Route  path="/home" element={<Home />}/>
               <Route  path="/ricette" element={<Recipes />}/>
               <Route  path="/dettaglio/:title/:id" element={<DetailRecipe />}/>
+              <Route  path="/registrazione" element={<RegistrationUser />}/>
           </Routes>
       </Router>
   );
