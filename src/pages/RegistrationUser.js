@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useUserContext } from "../context/userContext";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Input } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone, AppleOutlined, AndroidOutlined } from '@ant-design/icons';
-
-
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 const RegistrationUser = () => {
+  const { registerUser } = useUserContext();
+  const navigate = useNavigate();
+
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
@@ -23,7 +26,7 @@ const RegistrationUser = () => {
     if(evento.target.name === 'ripetiPassword' || evento.target.name === 'password'){
       convalidaPassword();
     }
-    
+
   };
 
 
@@ -96,8 +99,16 @@ const RegistrationUser = () => {
   function onSubmitForm(event) {
     event.preventDefault();
     console.log("campi del form ", formValues);
+
+    const utente = {
+      name: formValues.name,
+      email: formValues.email
+    }
+
+    registerUser(utente);
+    navigate('/');
   }
- 
+
 
   useEffect(() => {
     const isFormValid = Object.values(formErrors).every((error) => !error);
@@ -111,7 +122,7 @@ const RegistrationUser = () => {
 
     console.log(campiCompilati);
 
-   
+
 
   }, [formValues, formErrors] )
 
@@ -227,7 +238,7 @@ const RegistrationUser = () => {
                               name="ripetiPassword"
                               value={formValues.ripetiPassword}
                               onChange={handleOnChange}
-                              iconRender={(visible) => (visible ? <AppleOutlined /> : <AndroidOutlined />)}
+                              iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                             />
                             <label
                               className="form-label"
@@ -296,6 +307,5 @@ p.help.is-danger {
     color: #8e210a;
     margin-top: -10px;
 }
-
 `;
 export default RegistrationUser;

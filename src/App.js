@@ -1,5 +1,6 @@
 import "./App.scss";
 import { BrowserRouter as Router, Routes, Route  } from "react-router-dom";
+import { UserProvider } from "./context/userContext";
 import Header from "./components/Header";
 
 // Pagine
@@ -11,16 +12,19 @@ import RegistrationUser from "./pages/RegistrationUser";
 function App() {
 
   return (
-      <Router>
-          <Header />
-          <Routes>
-              <Route  path="/" element={<Home />}/>
-              <Route  path="/home" element={<Home />}/>
-              <Route  path="/ricette" element={<Recipes />}/>
-              <Route  path="/dettaglio/:title/:id" element={<DetailRecipe />}/>
-              <Route  path="/registrazione" element={<RegistrationUser />}/>
-          </Routes>
-      </Router>
+    <UserProvider>
+            <Router>
+                    <Header />
+                    <Routes>
+                        <Route  path="/" element={<Home />}/>
+                        <Route  path="/home" element={<Home />}/>
+                        <Route  path="/ricette" element={<Recipes />}/>
+                        <Route  path="/dettaglio/:title/:id" element={<DetailRecipe />}/>
+                        <Route  path="/registrazione" element={<RegistrationUser />}/>
+                    </Routes>
+                </Router>
+    </UserProvider>
+  
   );
 }
 
