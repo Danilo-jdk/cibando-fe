@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useUserContext } from "../context/userContext";
 
-// import per la modale
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-
 import styled from "styled-components";
 
 import CarouselSlider from "../components/CarouselSlider";
 import RecipeApi from "../api/recipeApi";
 import RecipeCard from "../components/RecipeCard";
 
+import Modal from "../components/modal";
+
 const Home = () => {
-   const [open, setOpen] = useState(false);
+     const [open, setOpen] = useState(false);
     const { user, registerUser } = useUserContext();
     const [evidenziazione, setEvidenziazione] = useState(false);
     const [ ricette, setRicette ] = useState([]);
@@ -50,9 +44,8 @@ const Home = () => {
     registerUser(null);
     setOpen(false);
   }
-  
-  
-  
+
+
 useEffect(() => {
   console.log('sei entrato nel componente')
   prendiRicette();
@@ -75,39 +68,9 @@ useEffect(() => {
         </div>
         <h2 style={{marginLeft: '20px'}}>Ecco le nostre ultime ricette:</h2>
         <RecipeCard ricette={ricette}  pag='home'/>
-        <Button variant="outlined" onClick={apriModale}>
-          Apri Dialog
-        </Button>
-        <div>
-          { user ? <p> Bentornato, {user.name}!</p> : <p>Benvenuto</p>}
-        </div>
+     
 
-        <Dialog
-          open={open}
-          onClose={chiudiModale}
-        >
-
-          <DialogTitle>
-            Grazie {user?.name} per esserti registrato
-          </DialogTitle>
-
-          <DialogContent>
-            <DialogContentText>
-              Ecco il riepilogo dei tuoi dati:
-              <ul>
-                <li>Nome: {user?.name}</li>
-                <li>Email: {user?.email}</li>
-              </ul>
-            </DialogContentText>
-          </DialogContent>
-
-          <DialogActions>
-            <Button onClick={chiudiModale} autoFocus variant="contained">CHIUDI</Button>
-          </DialogActions>
-
-        </Dialog>
-
-      
+      <Modal page='home' user={user} open={open} chiudiModale={chiudiModale}/>
     </Contenitore>
   )
 }
