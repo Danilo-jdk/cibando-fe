@@ -22,7 +22,6 @@ const RecipeCard = (props) => {
     }
     const handleSetNumber = (event) => {
         setRicettePerPagina(event.target.value);
-       
     }
     const accorciaDescrizione = (descrizione) => {
         const lunghezzaMassima = 170;
@@ -63,18 +62,17 @@ const RecipeCard = (props) => {
         <>
                 <div>
                 Ricette visualizzate da { indicePrimaRicetta + 1 } a { ricetteCorrenti.length < ricettePerPagina ? indicePrimaRicetta + ricetteCorrenti.length : indiceUltimaRicetta } su un totale di {ricette.length} ricette
-                <div>
-                    ricette visualizzate: 
+                   
+                   <div>
+                    Ricette visualizzate: 
+                   </div>
                     <select onChange={handleSetNumber}>
                         <option value={4}>4</option>
                         <option value={6}>6</option>
                         <option value={8}>8</option>
                     </select> 
-                </div>  
-            </div>
-            
+                </div>
         </>
- 
      }
         { ricetteCorrenti.map((ricetta, index) => (
             <div className="container-card" key={index}>
