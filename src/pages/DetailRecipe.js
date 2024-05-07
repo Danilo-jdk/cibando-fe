@@ -12,8 +12,8 @@ const DetailRecipe =  () => {
     async function onGetRecipe(){
         try {
             setLoading(true);
-            const idNumber = Number(id);
-            const recipe = await RecipeApi.getRecipe(idNumber);
+            // const idNumber = Number(id);
+            const recipe = await RecipeApi.getRecipe(id);
             if (recipe) {
                 setRicetta(recipe);
                 setLoading(false);

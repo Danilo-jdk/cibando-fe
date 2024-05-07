@@ -2,12 +2,25 @@ import React, { useState, useEffect } from "react";
 import { useUserContext } from "../context/userContext";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import UserApi from "../api/userApi";
+import { Alert, Snackbar } from "@mui/material";
 import { Input } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 const RegistrationUser = () => {
   const { registerUser } = useUserContext();
   const navigate = useNavigate();
+    // variabili per toast
+    const [open, setOpen] = useState(false);
+    const [severity, setSeverity] = useState('');
+    const [message, setMessage] = useState('');
+    const vertical = 'bottom';
+    const horizontal = 'right';
+
+    const closeToast = () => {
+        setOpen(false);
+    }
+
 
   const [formValues, setFormValues] = useState({
     name: "",
@@ -95,18 +108,45 @@ const RegistrationUser = () => {
       return true;
     }
   }
+ 
 
-  function onSubmitForm(event) {
+  async function onSubmitForm(event) {
     event.preventDefault();
     console.log("campi del form ", formValues);
 
     const utente = {
       name: formValues.name,
-      email: formValues.email
+      email: formValues.email,
     }
 
-    registerUser(utente);
-    navigate('/');
+    try {
+      const dati = {
+        name: formValues.name,
+        email: formValues.email,
+        password: formValues.password
+      }
+      const response = await UserApi.insertUser(dati);
+      if(response && response.status === 200) {
+        setSeverity('success');
+        setMessage('utente registrato con successo');
+        setOpen(true);
+        registerUser(utente);
+
+        setTimeout(() => {
+           navigate('/');
+        }, 4000)
+        
+       
+      } else {
+        setSeverity('error');
+        setMessage('Errore registrazione utente');
+        setOpen(true);
+      }
+    } catch (error) {
+      
+    }
+
+    
   }
 
 
@@ -290,6 +330,12 @@ const RegistrationUser = () => {
           </div>
         </div>
       </section>
+
+      <Snackbar open={open} autoHideDuration={4000} onClose={closeToast} anchorOrigin={{ vertical, horizontal}}>
+                <Alert onClose={closeToast} severity={severity} variant="filled">
+                    {message}
+                </Alert>
+      </Snackbar>
     </Contenitore>
   );
 };
