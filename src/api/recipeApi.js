@@ -51,9 +51,25 @@ const getRecipe = async (id) => {
     }
 }
 
+
+async function insertRecipe(recipe) {
+    try {
+        const response = await axios.post(apiBaseUrl, recipe);
+        if(response.status === 200) {
+            console.log('risposta: ' + response.data)
+            return response.data
+        } else {
+            throw new Error('Errore nella richiesta al server!')
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const RecipeApi = {
     getRecipes: getRecipes,
-    getRecipe: getRecipe
+    getRecipe: getRecipe,
+    insertRecipe: insertRecipe
 }
 
 export default RecipeApi;

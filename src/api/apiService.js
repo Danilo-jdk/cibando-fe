@@ -6,7 +6,7 @@ const primaChiamata = () => {
 }
 
 
-const secondaChiamata = (test) => {
+const secondaChiamata = (user) => {
     return  axios.get('urlsecondaChiamata')
 }
 

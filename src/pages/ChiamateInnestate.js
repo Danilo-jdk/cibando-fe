@@ -8,21 +8,21 @@ function ChiamateInnestate() {
     useEffect(() => {
         primaChiamata()
             .then(response => {
-                const risposta = response;
                 // processo i dati della  prima chiamata
-                //const utente = response.find(item => item.citta === 'roma');
-                return secondaChiamata();
-            })
-            .then(secondaResponse => {
-                    // processo i dati della  seconda chiamata
-                    setDati({
-                        datiPrincipali: 'risposta',
-                        datiSecondari: secondaResponse.data
+                const utente = response.find(item => item.citta === 'roma');
+                return secondaChiamata(utente)
+                    .then(secondaResponse => {
+                        // processo i dati della  seconda chiamata
+                        setDati({
+                            datiPrincipali: response,
+                            datiSecondari: secondaResponse.data
+                        })
                     })
-                })
                 .catch(error => {
                     // gestisco gli errori
                     console.log(error)
                 })
+            })
     }, [])
+
 }

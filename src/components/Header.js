@@ -44,8 +44,18 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link to='/nuova-ricetta' className="nav-link">
+                    <MarkAsUnreadIcon>Filled</MarkAsUnreadIcon> Nuova ricetta
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link to='/contatti' className="nav-link">
                     <MarkAsUnreadIcon>Filled</MarkAsUnreadIcon> Contatti
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to='/login' className="nav-link">
+                    <MarkAsUnreadIcon>Filled</MarkAsUnreadIcon> Accedi
                   </Link>
                 </li>
               </ul>
