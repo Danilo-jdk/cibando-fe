@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route  } from "react-router-dom";
 import { UserProvider } from "./context/userContext";
 import { AuthProvider} from "./auth/AuthContext";
 import { ProtectedRoutes } from "./auth/ProtectedRoutes";
+import { ProtectedRoutesUser } from "./auth/ProtectedRoutesUser";
+
 import Header from "./components/Header";
 
 // Pagine
@@ -13,6 +15,7 @@ import DetailRecipe from "./pages/DetailRecipe";
 import RegistrationUser from "./pages/RegistrationUser";
 import Login from "./pages/Login";
 import NewRecipe from "./pages/NewRecipe";
+import Profile from "./pages/Profile";
 
 function App() {
 
@@ -32,6 +35,11 @@ function App() {
                             <ProtectedRoutes>
                                 <NewRecipe />
                             </ProtectedRoutes>
+                        } />
+                        <Route path="/profilo" element={
+                          <ProtectedRoutesUser>
+                              <Profile />
+                          </ProtectedRoutesUser>
                         } />
                     </Routes>
               </AuthProvider>

@@ -13,8 +13,20 @@ async function insertUser(dati) {
     }
 }
 
+const getDetail = async (email) => {
+    try {
+        const response = await axios.get(apiBaseUrl + 'userDetail/' + email);
+        console.log('risposta dati utente: ', response);
+        return response;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+}
+
 const UserApi = {
-    insertUser: insertUser
+    insertUser: insertUser,
+    getDetail: getDetail
 }
 
 export default UserApi;

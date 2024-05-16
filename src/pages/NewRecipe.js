@@ -2,14 +2,22 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import RecipeApi from "../api/recipeApi";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 
 const NewRecipe = () => {
     const [ title, setTitle ] = useState('');
-    const [ description, setDescrition ] = useState('');
+    const [ description, setDescription ] = useState('');
     const [ image, setImage ] = useState('');
     const [ difficulty, setDifficulty ] = useState('');
 
     const navigate = useNavigate();
+
+    const handleEditorChange = (event, value) => {
+        const data = value.getData();
+        setDescription(data)
+    }
 
     const onSubmit = async (event) => { 
         event.preventDefault();
@@ -36,9 +44,13 @@ const NewRecipe = () => {
                 <label htmlFor="title" className="form-label">title: </label>
                 <input type="text" id="title" name="title" value={title} onChange={(e) => setTitle(e.target.value)} className="form-control" />
             </div>
-            <div>
+            <div className="descrizione">
                 <label htmlFor="description" className="form-label">description: </label>
-                <textarea value={description} onChange={(e) => setDescrition(e.target.value)} className="form-control"/>
+                <CKEditor
+                    editor={ClassicEditor}
+                    data={description}
+                    onChange={handleEditorChange}
+                 />
             </div>
             <div>
                 <label htmlFor="image" className="form-label">image: </label>

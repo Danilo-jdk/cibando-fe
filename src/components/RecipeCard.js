@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Modal from "./modal";
 import { Pagination } from "@mui/material";
+import DOMPurify from 'dompurify';
 
 const RecipeCard = (props) => {
     const [open, setOpen] = useState(false);
@@ -82,7 +83,8 @@ const RecipeCard = (props) => {
                     <div className="card-body">
                         <h5 className="card-title">{ricetta.title}</h5>
                         <p className="card-text">
-                            {ricetta.description.slice(0, accorciaDescrizione(ricetta.description))} ...
+        
+                            <span dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(ricetta.description.slice(0, accorciaDescrizione(ricetta.description)) + ' ...')}}/>
                         </p>
                         <Link to={`/dettaglio/${ricetta.title}/${ricetta._id}`}>
                             <button className="btn btn-primary">Visualizza</button> 

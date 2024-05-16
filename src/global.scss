@@ -35,3 +35,8 @@ body {
     display: flex;
     justify-content: center!important;
 }
+
+.descrizione .ck-editor__editable {
+        min-height: 200px!important;
+        max-height: 200px!important;
+}
